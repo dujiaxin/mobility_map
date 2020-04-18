@@ -1,11 +1,4 @@
-import 'ol/ol.css';
-import Map from 'ol/Map';
-import View from 'ol/View';
-import GeoJSON from 'ol/format/GeoJSON';
-import OSM from 'ol/source/OSM';
-import VectorTileSource from 'ol/source/VectorTile';
-import {Tile as TileLayer, VectorTile as VectorTileLayer} from 'ol/layer';
-import Projection from 'ol/proj/Projection';
+
 
 // Converts geojson-vt data to GeoJSON
 var replacer = function(key, value) {
