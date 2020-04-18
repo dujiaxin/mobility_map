@@ -1,5 +1,3 @@
-
-
 // Converts geojson-vt data to GeoJSON
 var replacer = function(key, value) {
   if (value.geometry) {
@@ -40,14 +38,14 @@ var replacer = function(key, value) {
   }
 };
 
-var map = new Map({
+var map = new ol.Map({
   layers: [
-    new TileLayer({
-      source: new OSM()
+    new ol.layer.Tile({
+      source: new ol.source.OSM()
     })
   ],
   target: 'map',
-  view: new View({
+  view: new ol.View({
     center: [0, 0],
     zoom: 2
   })
@@ -61,10 +59,10 @@ fetch(url).then(function(response) {
     extent: 4096,
     debug: 1
   });
-  var vectorSource = new VectorTileSource({
-    format: new GeoJSON({
+  var vectorSource = new ol.source.VectorTile({
+    format: new ol.format.GeoJSON({
       // Data returned from geojson-vt is in tile pixel units
-      dataProjection: new Projection({
+      dataProjection: new ol.proj.Projection({
         code: 'TILE_PIXELS',
         units: 'tile-pixels',
         extent: [0, 0, 4096, 4096]
@@ -79,7 +77,7 @@ fetch(url).then(function(response) {
       return 'data:application/json;charset=UTF-8,' + geojson;
     }
   });
-  var vectorLayer = new VectorTileLayer({
+  var vectorLayer = new ol.layer.VectorTile({
     source: vectorSource
   });
   map.addLayer(vectorLayer);
